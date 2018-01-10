@@ -1039,8 +1039,8 @@ bool ccGBLSensor::fromFile_MeOnly(QFile& in, short dataVersion, int flags)
 	ccSerializationHelper::CoordsFromDataStream(inStream,flags,&m_deltaTheta,1);
 	if (dataVersion < 38)
 	{
-		ccSerializationHelper::ScalarsFromDataStream(inStream,flags,&m_sensorRange,1);
-		ccSerializationHelper::ScalarsFromDataStream(inStream,flags,&m_uncertainty,1);
+		ccSerializationHelper::CoordsFromDataStream(inStream,flags,&m_sensorRange,1);
+		ccSerializationHelper::CoordsFromDataStream(inStream,flags,&m_uncertainty,1);
 	}
 	else
 	{

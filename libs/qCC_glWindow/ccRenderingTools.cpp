@@ -45,7 +45,8 @@ void ccRenderingTools::ShowDepthBuffer(ccGBLSensor* sensor, QWidget* parent/*=0*
 	ScalarType minDist = 0.0f;
 	ScalarType maxDist = 0.0f;
 	{
-		const ScalarType* _zBuff = &(depthBuffer.zBuff.front());
+		double tempBuffer = (double)depthBuffer.zBuff.front();
+		const ScalarType* _zBuff = &tempBuffer;
 		double sumDist = 0.0;
 		double sumDist2 = 0.0;
 		unsigned count = 0;
@@ -84,7 +85,8 @@ void ccRenderingTools::ShowDepthBuffer(ccGBLSensor* sensor, QWidget* parent/*=0*
 		assert(colorScale);
 		ScalarType coef = maxDist - minDist < ZERO_TOLERANCE ? 0 : static_cast<ScalarType>(ccColorScale::MAX_STEPS - 1) / (maxDist - minDist);
 
-		const ScalarType* _zBuff = &(depthBuffer.zBuff.front());
+		double tempBuffer = (double)depthBuffer.zBuff.front();
+		const ScalarType* _zBuff = &tempBuffer;
 		for (unsigned y=0; y<depthBuffer.height; ++y)
 		{
 			for (unsigned x=0; x<depthBuffer.width; ++x,++_zBuff)
@@ -187,8 +189,8 @@ void ConvertToLogScale(ScalarType& dispMin, ScalarType& dispMax)
 {
 	ScalarType absDispMin = (dispMax < 0 ? std::min(-dispMax, -dispMin) : std::max<ScalarType>(dispMin, 0)); 
 	ScalarType absDispMax = std::max(std::abs(dispMin), std::abs(dispMax));
-	dispMin = std::log10(std::max(absDispMin, FLT_EPSILON));
-	dispMax = std::log10(std::max(absDispMax, FLT_EPSILON));
+	dispMin = std::log10(std::max(absDispMin, DBL_EPSILON));
+	dispMax = std::log10(std::max(absDispMax, DBL_EPSILON));
 }
 
 void ccRenderingTools::DrawColorRamp(const CC_DRAW_CONTEXT& context)

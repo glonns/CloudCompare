@@ -23,6 +23,6 @@
 typedef float PointCoordinateType;
 
 //! Type of a single scalar field value
-typedef float ScalarType;
+typedef double ScalarType;
 
 #endif //CC_TYPES_HEADER
